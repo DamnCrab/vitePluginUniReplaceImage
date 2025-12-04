@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import type {Plugin, ResolvedConfig} from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
@@ -58,7 +58,7 @@ const platformExtMap: Record<string, string> = {
   'app-plus': '.css',
 }
 
-const replaceCssText = (data: string, color: string, replaceColor: string) => {
+export const replaceCssText = (data: string, color: string, replaceColor: string) => {
   const replaceColorRegex = new RegExp(
     `url\\((https?://[^)]*/${color})\\)`,
     'g',
@@ -66,7 +66,7 @@ const replaceCssText = (data: string, color: string, replaceColor: string) => {
   return data.replace(replaceColorRegex, `url(${replaceColor})`)
 }
 
-const replaceJsText = (data: string, color: string, replaceColor: string) => {
+export const replaceJsText = (data: string, color: string, replaceColor: string) => {
   // Matches pattern: src:"https://"+e+"/.../img/shadow-grey.png"
   // Allowing for variable names (\w+) and potential whitespace
   const replaceColorRegex = new RegExp(
@@ -82,7 +82,7 @@ const modifyFile = async (filePath: string, styleExt: string) => {
   const modifiedColors: string[] = []
   const ext = path.extname(filePath)
 
-  colorReplaceMap.forEach(({test: color, replace: replaceColor}) => {
+  colorReplaceMap.forEach(({ test: color, replace: replaceColor }) => {
     let regex: RegExp
     if (ext === styleExt) {
       regex = new RegExp(color, 'i')
@@ -127,7 +127,7 @@ const readAndModifyFiles = async (
   log: any[] = [],
 ) => {
   try {
-    const files = await fs.readdir(defaultPath, {withFileTypes: true})
+    const files = await fs.readdir(defaultPath, { withFileTypes: true })
 
     for (const file of files) {
       const fullPath = path.join(defaultPath, file.name)
@@ -164,7 +164,7 @@ export default function vitePluginUniReplaceImage(): Plugin {
 
       let targetPath = config.build.outDir
       if (!targetPath) {
-         targetPath = path.resolve(process.cwd(), `./dist/build/${platform}/`)
+        targetPath = path.resolve(process.cwd(), `./dist/build/${platform}/`)
       }
       // Ensure absolute path
       if (!path.isAbsolute(targetPath)) {

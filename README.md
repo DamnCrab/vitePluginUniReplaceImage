@@ -29,12 +29,12 @@ npm install vite-plugin-uni-replace-image --save-dev
 ```typescript
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
-import replaceImage from 'vite-plugin-uni-replace-image'
+import rvitePluginUniReplaceImageeplaceImage from 'vite-plugin-uni-replace-image'
 
 export default defineConfig({
   plugins: [
     uni(),
-    replaceImage({
+    vitePluginUniReplaceImage({
       // 选项 (可选)
       runOnDev: false // 默认为 false，仅在生产构建时运行。设为 true 可在开发模式下运行。
     })
@@ -92,12 +92,12 @@ Add the plugin to your `vite.config.ts`:
 ```typescript
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
-import replaceImage from 'vite-plugin-uni-replace-image'
+import vitePluginUniReplaceImage from 'vite-plugin-uni-replace-image'
 
 export default defineConfig({
   plugins: [
     uni(),
-    replaceImage({
+    vitePluginUniReplaceImage({
       // Options (optional)
       runOnDev: false // Default is false. Set to true to run in development mode.
     })

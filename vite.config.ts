@@ -1,12 +1,11 @@
 import { defineConfig } from 'vite'
 import path from 'path'
-import dts from 'vite-plugin-dts'
+// @ts-ignore
+import dts from 'unplugin-dts/vite'
 
 export default defineConfig({
     plugins: [
-        dts({
-            insertTypesEntry: true,
-        }),
+        dts(),
     ],
     build: {
         minify: true,

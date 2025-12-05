@@ -9,6 +9,7 @@ export default defineConfig({
         }),
     ],
     build: {
+        minify: true,
         lib: {
             entry: path.resolve(__dirname, 'index.ts'),
             name: 'VitePluginUniReplaceImage',
@@ -20,7 +21,8 @@ export default defineConfig({
             output: {
                 globals: {
                     vite: 'Vite'
-                }
+                },
+                exports: 'named',
             }
         }
     }

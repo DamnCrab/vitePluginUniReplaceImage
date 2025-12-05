@@ -1,6 +1,6 @@
 {
     "name": "vite-plugin-uni-replace-image",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "A Vite plugin to replace UniApp image tracking points with Base64 data",
     "repository": {
         "type": "git",

@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import type { Plugin, ResolvedConfig } from 'vite'
-import fs from 'node:fs/promises'
-import path from 'node:path'
-import process from 'node:process'
+import * as fs from 'node:fs/promises'
+import * as path from 'node:path'
+import * as process from 'node:process'
 
 interface ColorReplaceMapItem {
   test: string
@@ -154,7 +154,7 @@ export interface Options {
   runOnDev?: boolean
 }
 
-export default function vitePluginUniReplaceImage(options: Options = {}): Plugin {
+function vitePluginUniReplaceImage(options: Options = {}): Plugin {
   let config: ResolvedConfig
 
   return {
@@ -199,3 +199,5 @@ export default function vitePluginUniReplaceImage(options: Options = {}): Plugin
     },
   }
 }
+
+export { vitePluginUniReplaceImage as default }

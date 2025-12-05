@@ -146,16 +146,31 @@ const readAndModifyFiles = async (
   return log
 }
 
-export default function vitePluginUniReplaceImage(): Plugin {
+export interface Options {
+  /**
+   * Whether to run the plugin in development mode (watch mode).
+   * @default false
+   */
+  runOnDev?: boolean
+}
+
+export default function vitePluginUniReplaceImage(options: Options = {}): Plugin {
   let config: ResolvedConfig
 
   return {
-    name: 'vite-plugin-replace-image',
+    name: 'vite-plugin-uni-replace-image',
     apply: 'build',
     configResolved(resolvedConfig) {
       config = resolvedConfig
     },
     closeBundle: async () => {
+      const isWatch = !!config.build.watch
+      const shouldRun = !isWatch || (isWatch && options.runOnDev)
+
+      if (!shouldRun) {
+        return
+      }
+
       const platform = process.env.UNI_PLATFORM || 'mp-weixin'
       const styleExt = platformExtMap[platform] || '.css'
 

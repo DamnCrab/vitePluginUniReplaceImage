@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import type {Plugin, ResolvedConfig} from 'vite'
-import * as fs from 'node:fs/promises'
-import * as path from 'node:path'
-import * as process from 'node:process'
+import type { Plugin, ResolvedConfig } from 'vite'
+import { readFile, writeFile, readdir } from 'node:fs/promises'
+import path from 'node:path'
+import process from 'node:process'
 
 interface ColorReplaceMapItem {
     test: string
@@ -77,12 +77,12 @@ export const replaceJsText = (data: string, color: string, replaceColor: string)
 }
 
 const modifyFile = async (filePath: string, styleExt: string) => {
-    let data = await fs.readFile(filePath, 'utf8')
+    let data = await readFile(filePath, 'utf8')
     let fileModified = false
     const modifiedColors: string[] = []
     const ext = path.extname(filePath)
 
-    colorReplaceMap.forEach(({test: color, replace: replaceColor}) => {
+    colorReplaceMap.forEach(({ test: color, replace: replaceColor }) => {
         let regex: RegExp
         if (ext === styleExt) {
             regex = new RegExp(color, 'i')
@@ -111,7 +111,7 @@ const modifyFile = async (filePath: string, styleExt: string) => {
     })
 
     if (fileModified) {
-        await fs.writeFile(filePath, data)
+        await writeFile(filePath, data)
     }
 
     return {
@@ -127,7 +127,7 @@ const readAndModifyFiles = async (
     log: any[] = [],
 ) => {
     try {
-        const files = await fs.readdir(defaultPath, {withFileTypes: true})
+        const files = await readdir(defaultPath, { withFileTypes: true })
 
         for (const file of files) {
             const fullPath = path.join(defaultPath, file.name)
@@ -200,4 +200,4 @@ function vitePluginUniReplaceImage(options: Options = {}): Plugin {
     }
 }
 
-export {vitePluginUniReplaceImage as default}
+export { vitePluginUniReplaceImage as default }

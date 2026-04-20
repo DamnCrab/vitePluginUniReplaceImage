@@ -29,7 +29,7 @@ npm install vite-plugin-uni-replace-image --save-dev
 ```typescript
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
-import rvitePluginUniReplaceImageeplaceImage from 'vite-plugin-uni-replace-image'
+import vitePluginUniReplaceImage from 'vite-plugin-uni-replace-image'
 
 export default defineConfig({
   plugins: [
